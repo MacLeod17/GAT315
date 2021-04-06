@@ -7,7 +7,7 @@ using TMPro;
 public class BoolUI : MonoBehaviour
 {
     public Toggle toggle = null;
-    public TMP_Text label = null;
+    public Text label = null;
 
     public BoolData data = null;
 

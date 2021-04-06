@@ -20,6 +20,8 @@ public class World : MonoBehaviour
 
     void Update()
     {
+        if (!simulate.value) return;
+
         float dt = Time.deltaTime;
 
         bodies.ForEach(body => body.Step(dt));

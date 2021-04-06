@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shape : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer))]
+public abstract class Shape : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum eType
     {
-        
+        Circle,
+        Box
     }
 
-    // Update is called once per frame
-    void Update()
+    public abstract eType type { get; }
+    public abstract float mass { get; }
+    public float density { get; set; } = 1.0f;
+    public Color color { get => spriteRenderer.material.color; set => spriteRenderer.material.color = value; }
+
+    protected SpriteRenderer spriteRenderer;
+
+    private void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

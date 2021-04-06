@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleShape : MonoBehaviour
+public class CircleShape : Shape
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public float radius { get => transform.localScale.x * 0.5f; set => transform.localScale = Vector3.one * value; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public override eType type => eType.Circle;
+	public override float mass => (Mathf.PI * (radius * radius)) * density;
 }

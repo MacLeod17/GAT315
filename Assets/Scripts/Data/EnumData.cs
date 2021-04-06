@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnumData")]
-public class EnumData : ScriptableObject
+public abstract class EnumData : ScriptableObject
 {
-    
+	public abstract string id { get; }
+	public abstract int index { get; set; }
+	public abstract string[] names { get; }
 }

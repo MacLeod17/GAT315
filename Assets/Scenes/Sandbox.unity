@@ -996,6 +996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simulate: {fileID: 11400000, guid: 9e77ac5ef4f08804f8fa907c98d75c64, type: 2}
   gravity: {fileID: 11400000, guid: 5d2f80abef9fdb04889f43e7959e40c9, type: 2}
+  useExplicit: 0
 --- !u!1 &1921604182
 GameObject:
   m_ObjectHideFlags: 0

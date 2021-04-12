@@ -25,7 +25,7 @@ public class Body : MonoBehaviour
     public Vector2 velocity { get; set; } = Vector2.zero;
     public Vector2 position { get { return transform.position; } set { transform.position = value; } }
 
-    public float mass { get; set; } = 1;
+    public float mass { get => shape.mass; }
     public float damping { get; set; } = 0;
 
     public eType Type { get; set; }

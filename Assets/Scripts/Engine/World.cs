@@ -6,6 +6,7 @@ using UnityEngine;
 public class World : MonoBehaviour
 {
     public BoolData simulate;
+    public FloatData gravitation;
     public FloatData gravity;
     public FloatData fixedFPS;
     public StringData fpsText;
@@ -39,6 +40,8 @@ public class World : MonoBehaviour
         if (!simulate.value) return;
 
         timeAccumulator += dt;
+
+        GravitationalForce.ApplyForce(bodies, gravitation);
 
         while (timeAccumulator > fixedDeltaTime)
         {

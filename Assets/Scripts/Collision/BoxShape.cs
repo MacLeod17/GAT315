@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleShape : Shape
+public class BoxShape : Shape
 {
-	public float radius { get => size * 0.5f; }
-
-	public override eType type => eType.Circle;
+	public override eType type => eType.Box;
 	public override float size { get => transform.localScale.x; set => transform.localScale = Vector2.one * value; }
-	public override float mass => (Mathf.PI * radius * radius) * density;
+	public override float mass => (size * size) * density;
 }

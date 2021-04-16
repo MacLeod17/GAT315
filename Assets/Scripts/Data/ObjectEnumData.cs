@@ -6,14 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ObjectEnum", menuName = "Data/Enum/Object")]
 public class ObjectEnumData : EnumData
 {
-	public enum eType
+	public enum eValue
 	{
 		Circle,
 		Box
 	}
-	public eType type;
+	public eValue value;
 
-	public override string id => type.ToString();
-	public override int index { get => (int)type; set => type = (eType)value; }
-	public override string[] names => Enum.GetNames(typeof(eType));
+	public override int index { get => (int)value; set => this.value = (eValue)value; }
+	public override string[] names => Enum.GetNames(typeof(eValue));
 }

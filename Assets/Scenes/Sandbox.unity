@@ -1715,7 +1715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6ac93a22ba1f1428fc713b593128c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: {fileID: 5505632249066729658, guid: f666b5b04c83400499097e7ff9a4da0b, type: 3}
+  original: {fileID: 8461176856711836716, guid: 017793b3bdedca74d80b448e47485cd2, type: 3}
   speed: {fileID: 11400000, guid: bb9b4da9a44d5474d9650e108970db48, type: 2}
   damping: {fileID: 11400000, guid: a694183d09653ca479d15dd168e151ce, type: 2}
   density: {fileID: 11400000, guid: aef2e0e0737ba2c4a973e19706f6d089, type: 2}

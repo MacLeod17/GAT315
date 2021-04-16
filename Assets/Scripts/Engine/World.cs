@@ -43,6 +43,8 @@ public class World : MonoBehaviour
 
         GravitationalForce.ApplyForce(bodies, gravitation);
 
+        bodies.ForEach(body => body.shape.color = Color.red);
+
         while (timeAccumulator > fixedDeltaTime)
         {
             bodies.ForEach(body => body.Step(fixedDeltaTime));

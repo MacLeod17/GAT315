@@ -20,7 +20,7 @@ public abstract class Shape : MonoBehaviour
 
     protected SpriteRenderer spriteRenderer;
 
-    private void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

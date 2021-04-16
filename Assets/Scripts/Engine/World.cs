@@ -6,6 +6,7 @@ using UnityEngine;
 public class World : MonoBehaviour
 {
     public BoolData simulate;
+    public BoolData collision;
     public FloatData gravitation;
     public FloatData gravity;
     public FloatData fixedFPS;
@@ -43,8 +44,6 @@ public class World : MonoBehaviour
 
         GravitationalForce.ApplyForce(bodies, gravitation);
 
-        bodies.ForEach(body => body.shape.color = Color.red);
-
         while (timeAccumulator > fixedDeltaTime)
         {
             bodies.ForEach(body => body.Step(fixedDeltaTime));
@@ -56,6 +55,10 @@ public class World : MonoBehaviour
             {
                 bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedDeltaTime));
             }
+
+            bodies.ForEach(body => body.shape.color = Color.white);
+            Collision.CreateContacts(bodies, out List<Contact> contacts);
+            contacts.ForEach(contact => { contact.bodyA.shape.color = Color.green; contact.bodyB.shape.color = Color.green; });
 
             timeAccumulator -= fixedDeltaTime;
         }

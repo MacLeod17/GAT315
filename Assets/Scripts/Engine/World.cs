@@ -59,6 +59,7 @@ public class World : MonoBehaviour
             bodies.ForEach(body => body.shape.color = Color.white);
             Collision.CreateContacts(bodies, out List<Contact> contacts);
             contacts.ForEach(contact => { contact.bodyA.shape.color = Color.green; contact.bodyB.shape.color = Color.green; });
+            ContactSolver.Resolve(contacts);
 
             timeAccumulator -= fixedDeltaTime;
         }

@@ -198,8 +198,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 60}
+  m_AnchoredPosition: {x: -100, y: 0}
+  m_SizeDelta: {x: -200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5641339669343279412
 MonoBehaviour:
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggle: {fileID: 5641339668265127156}
   label: {fileID: 5641339669419660053}
-  data: {fileID: 11400000, guid: 9e77ac5ef4f08804f8fa907c98d75c64, type: 2}
+  data: {fileID: 0}
 --- !u!222 &5641339669343279411
 CanvasRenderer:
   m_ObjectHideFlags: 0

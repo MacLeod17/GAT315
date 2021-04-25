@@ -9,6 +9,8 @@ public class Creator : Action
     public FloatData damping;
     public FloatData size;
     public FloatData density;
+    public FloatData restitution;
+    public BodyEnumData bodyType;
 
     bool action { get; set; } = false;
     bool oneTime { get; set; } = false;
@@ -35,10 +37,11 @@ public class Creator : Action
             if (gameObject.TryGetComponent<Body>(out Body body))
             {
                 body.damping = damping;
+                body.restitution = restitution;
                 body.shape.size = size;
                 body.shape.density = density;
+                body.type = (Body.eType)bodyType.value;
 
-                //body.restitution = restitution;
                 Vector2 force = Random.insideUnitSphere.normalized * speed;
                 body.AddForce(force, Body.eForceMode.Velocity);
                 World.Instance.bodies.Add(body);

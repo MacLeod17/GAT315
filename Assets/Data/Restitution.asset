@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e7eb3c01f998e48b820d630c4a5eb0, type: 3}
   m_Name: Restitution
   m_EditorClassIdentifier: 
-  value: 0
+  value: 0.1

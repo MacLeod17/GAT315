@@ -19,18 +19,18 @@ public class Body : MonoBehaviour
     }
 
     public Shape shape;
-
     public Vector2 force { get; set; } = Vector2.zero;
-    public Vector2 acceleration { get; set; } = Vector2.zero;
     public Vector2 velocity { get; set; } = Vector2.zero;
     public Vector2 position { get { return transform.position; } set { transform.position = value; } }
+    public Vector2 acceleration { get; set; } = Vector2.zero;
 
     public float mass { get => shape.mass; }
-    public float inverseMass { get => (mass == 0) ? 0 : 1.0f / mass; }
+    public float inverseMass { get => (mass == 0) ? 0 : 1 / mass; }
     public float damping { get; set; } = 0;
+    public float restitution { get; set; } = 0.5f;
 
-    public eType Type { get; set; }
-
+    public eType type { get; set; }
+    
     public void AddForce(Vector2 force, eForceMode forceMode = eForceMode.Force)
     {
         switch (forceMode)
@@ -47,6 +47,7 @@ public class Body : MonoBehaviour
             default:
                 break;
         }
+
     }
 
     public void Step(float dt)

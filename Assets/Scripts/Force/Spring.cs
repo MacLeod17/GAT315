@@ -17,4 +17,9 @@ public class Spring : MonoBehaviour
         bodyA.AddForce(-force);
         bodyB.AddForce(force);
     }
+
+    public void Draw()
+    {
+        Lines.Instance.AddLine(bodyA.position, bodyB.position, Color.white, 0.1f);
+    }
 }

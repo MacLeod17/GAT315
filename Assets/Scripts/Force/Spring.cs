@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spring : MonoBehaviour
+public class Spring
 {
     public Body bodyA { get; set; } = null;
     public Body bodyB { get; set; } = null;
@@ -13,9 +13,10 @@ public class Spring : MonoBehaviour
     public void ApplyForce()
     {
         Vector2 force = Utilities.SpringForce(bodyA.position, bodyB.position, restLength, k);
+        float modifier = (bodyA.type == Body.eType.Static || bodyB.type == Body.eType.Static) ? 1.0f : 0.5f;
 
-        bodyA.AddForce(-force);
-        bodyB.AddForce(force);
+        bodyA.AddForce(-force * modifier);
+        bodyB.AddForce(force * modifier);
     }
 
     public void Draw()

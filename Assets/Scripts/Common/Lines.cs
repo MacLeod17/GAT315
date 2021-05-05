@@ -89,6 +89,9 @@ public class Lines : MonoBehaviour
 
     private void OnResetRender(ScriptableRenderContext context, Camera camera)
     {
-        Reset();
+        if (Application.isPlaying)
+        {
+            Reset();
+        }
     }
 }

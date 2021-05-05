@@ -33,7 +33,7 @@ public class World : MonoBehaviour
     void Update()
     {
         Timer.Update();
-        fpsText.value = "FPS: " + Timer.fps.ToString("F1") + " : " + (Timer.dt * 1000.0f).ToString("F1") + " ms";
+        fpsText.value = $"FPS: {Timer.fps:F1} : {(Timer.dt * 1000.0f):F1} ms";
 
         springs.ForEach(spring => spring.Draw());
 

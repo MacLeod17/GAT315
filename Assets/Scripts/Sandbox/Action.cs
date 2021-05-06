@@ -7,7 +7,8 @@ public abstract class Action : MonoBehaviour
     public enum eActionType
     {
         Creator,
-        Connector
+        Connector,
+        Selector
     }
 
     public bool active { get; set; } = false;

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5505632249066729799}
   - component: {fileID: 6537175633209225156}
-  - component: {fileID: 5505632249066729657}
+  - component: {fileID: 1307631894475294192}
   - component: {fileID: 5505632249066729656}
   - component: {fileID: 9003030826342985128}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: PointEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720de74f05001934cbfb46953298fe89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5505632249066729657
+--- !u!114 &1307631894475294192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5505632249066729658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510dc45e88a74734fb6f0970a8b5e73f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c4c56760a31cb049a70228b673c6b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 6537175633209225156}
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cedf86928abf95445b37a3bb93211819, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.47058824}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

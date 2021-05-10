@@ -17,6 +17,7 @@ public class World : MonoBehaviour
     static public World Instance { get => instance; }
 
     public Vector2 Gravity { get { return new Vector2(0, gravity); } }
+    public List<Force> forces { get; set; } = new List<Force>();
     public List<Body> bodies { get; set; } = new List<Body>();
     public List<Spring> springs { get; set; } = new List<Spring>();
 
@@ -40,6 +41,7 @@ public class World : MonoBehaviour
         if (!simulate) return;
 
         GravitationalForce.ApplyForce(bodies, gravitation);
+        forces.ForEach(force => bodies.ForEach(body => force.ApplyForce(body)));
         springs.ForEach(spring => spring.ApplyForce());
 
         timeAccumulator = timeAccumulator + Time.deltaTime;

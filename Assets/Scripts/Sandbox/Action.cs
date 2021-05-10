@@ -8,6 +8,7 @@ public abstract class Action : MonoBehaviour
     {
         Creator,
         Connector,
+        Force,
         Selector
     }
 

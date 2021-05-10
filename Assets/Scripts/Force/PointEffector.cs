@@ -18,7 +18,7 @@ public class PointEffector : Force
 		if (circleA.Contains(circleB))
 		{
 			//Vector2 direction = < direction vector body position(head) from position (tail) >;
-			Vector2 direction = circleB.center - circleA.center;
+			Vector2 direction = body.position - position;
 			//float distance = <distance of direction vector>;
 			float distance = direction.magnitude;
 			//float t = < normalized distance(0 - 1) by dividing distance by shape.radius >;

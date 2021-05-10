@@ -25,7 +25,7 @@ public class Body : MonoBehaviour
     public Vector2 acceleration { get; set; } = Vector2.zero;
 
     public float mass { get => shape.mass; }
-    public float inverseMass { get => (mass == 0) ? 0 : 1 / mass; }
+    public float inverseMass { get => (mass == 0 || type == eType.Static) ? 0 : 1 / mass; }
     public float damping { get; set; } = 0;
     public float restitution { get; set; } = 0.5f;
 
@@ -56,6 +56,6 @@ public class Body : MonoBehaviour
     {
         if (type != eType.Dynamic) return;
 
-        acceleration = World.Instance.Gravity + (force * inverseMass);
+        acceleration += World.Instance.Gravity + (force * inverseMass);
     }
 }

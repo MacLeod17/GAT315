@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class Shape : MonoBehaviour
 {
+
     public enum eType
     {
         Circle,
@@ -15,10 +16,12 @@ public abstract class Shape : MonoBehaviour
     public abstract float mass { get; }
     public abstract float size { get; set; }
 
-    public float density { get; set; } = 1.0f;
-    public Color color { get => spriteRenderer.material.color; set => spriteRenderer.material.color = value; }
+    public float density { get; set; } = 1;
 
-    protected SpriteRenderer spriteRenderer;
+    public Color color { set => spriteRenderer.material.color = value; }
+    public AABB aabb { get => new AABB(transform.position, Vector2.one * size); }
+
+    SpriteRenderer spriteRenderer;
 
     private void Awake()
     {

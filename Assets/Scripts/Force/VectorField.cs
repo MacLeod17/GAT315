@@ -22,49 +22,45 @@ public class VectorField : Force
         CreateGrid();
     }
 
-	private void Update()
-	{
+    private void Update()
+    {
         if (!enable) return;
 
-		if (showDebug)
-		{
+        if (showDebug)
+        {
             Draw();
-		}
+        }
 
         if (noiseOffset != prevNoiseOffset ||
             noiseScale != prevNoiseOffset)
-		{
+        {
             CreateGrid();
-		}
+        }
 
         prevNoiseOffset = noiseOffset;
         prevNoiseScale = noiseScale;
     }
 
-	public override void ApplyForce(Body body)
+    public override void ApplyForce(Body body)
     {
         if (!enable) return;
 
         Vector2 position = body.position;
-        position += World.Instance.AABB.extents;
+        position = position + World.Instance.AABB.extents;
 
         int x = Mathf.FloorToInt(position.x);
         int y = Mathf.FloorToInt(position.y);
 
-        if (
-            x < 0 || 
-            x >= grid.GetLength(0) || 
-            y < 0 || 
-            y >= grid.GetLength(1)
-            ) 
+        if (x < 0 || x >= grid.GetLength(0) || y < 0 || y > grid.GetLength(1))
+        {
             return;
-
+        }
         Vector2 force = grid[x, y] * forceMagnitude;
         body.AddForce(force, Body.eForceMode.Acceleration);
     }
 
     private void CreateGrid()
-	{
+    {
         gridSize = World.Instance.AABB.size;
         grid = new Vector2[Mathf.CeilToInt(gridSize.x), Mathf.CeilToInt(gridSize.y)];
 
@@ -74,7 +70,7 @@ public class VectorField : Force
             {
                 float px = noiseOffset + (x * noiseScale);
                 float py = noiseOffset + (y * noiseScale);
-                float angle = Mathf.PerlinNoise(px, py) * Mathf.PI * 2.0f;
+                float angle = Mathf.PerlinNoise(px, py) * Mathf.PI * 2;
 
                 Vector2 direction = Vector2.zero;
                 direction.x = Mathf.Cos(angle);
@@ -86,7 +82,7 @@ public class VectorField : Force
     }
 
     private void Draw()
-	{
+    {
         AABB aabb = World.Instance.AABB;
         for (int x = 0; x < grid.GetLength(0); x++)
         {

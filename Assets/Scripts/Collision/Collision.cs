@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Collision
+public class Collison
 {
     public static void CreateContacts(List<Body> bodies, out List<Contact> contacts)
     {
         contacts = new List<Contact>();
 
-        for (int i = 0; i < bodies.Count; i++)
+        for (int i = 0; i < bodies.Count - 1; i++)
         {
             for (int j = i + 1; j < bodies.Count; j++)
             {
@@ -23,11 +23,11 @@ public static class Collision
                 if (circleA.Contains(circleB))
                 {
                     Contact contact = new Contact() { bodyA = bodyA, bodyB = bodyB };
-
                     Vector2 direction = circleA.center - circleB.center;
+
                     float distance = direction.magnitude;
-                    contact.normal = direction.normalized;
                     contact.depth = (circleA.radius + circleB.radius) - distance;
+                    contact.normal = direction.normalized;
 
                     contacts.Add(contact);
                 }

@@ -13,22 +13,27 @@ public class World : MonoBehaviour
     public FloatData fixedFPS;
     public StringData fpsText;
     public VectorField vectorField;
+    public TMP_Text valueText = null;
+
+    private Vector2 size;
+    float fps = 0;
 
     static World instance;
-    static public World Instance { get => instance; }
 
-    public Vector2 Gravity { get { return new Vector2(0, gravity); } }
+    public float timeAccumaltor;
+    public float fpsAverage;
+    public float smoothing = 0.95f;
+    public float fixedDeltaTime { get { return 1.0f / fixedFPS.value; } }
+    static public World Instance { get { return instance; } }
+
+    public Vector2 Gravity { get { return new Vector2(0, gravity.value); } }
     public List<Body> bodies { get; set; } = new List<Body>();
-    public List<Force> forces { get; set; } = new List<Force>();
     public List<Spring> springs { get; set; } = new List<Spring>();
+    public List<Force> forces { get; set; } = new List<Force>();
 
-    public Vector2 WorldSize { get => size * 2; }
     public AABB AABB { get => aabb; }
 
     AABB aabb;
-    Vector2 size;
-    float fixedDeltaTime { get { return 1.0f / fixedFPS; } }
-    float timeAccumulator = 0;
 
     private void Awake()
     {
@@ -39,40 +44,45 @@ public class World : MonoBehaviour
 
     void Update()
     {
-        Timer.Update();
-        fpsText.value = $"FPS: {Timer.fps:F1} : {(Timer.dt * 1000.0f):F1} ms";
-
         springs.ForEach(spring => spring.Draw());
+        if (!simulate.value)
+        {
+            return;
+        }
+        float dt = Time.deltaTime;
+        fps = (1.0f / dt);
+        fpsAverage = (fpsAverage * smoothing) + (fps * (1 - smoothing));
+        valueText.text = fixedFPS.value.ToString("F2");
 
-        if (!simulate) return;
+        timeAccumaltor += Time.deltaTime;
 
-        // Forces
-        GravitationalForce.ApplyForce(bodies, gravitation);
+        //forces 
+        GravitationalForce.ApplyForce(bodies, gravitation.value);
         forces.ForEach(force => bodies.ForEach(body => force.ApplyForce(body)));
         springs.ForEach(spring => spring.ApplyForce());
         bodies.ForEach(body => vectorField.ApplyForce(body));
 
-        timeAccumulator = timeAccumulator + Time.deltaTime;
-        while (timeAccumulator >= fixedDeltaTime)
+        while (timeAccumaltor > fixedDeltaTime)
         {
             bodies.ForEach(body => body.Step(fixedDeltaTime));
-            bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedDeltaTime));
+            bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedDeltaTime));//ExplicitEuler(body, dt));
+            bodies.ForEach(body => body.shape.color = Color.green);
 
-            if (collision)
+            if (collision == true)
             {
-                bodies.ForEach(body => body.shape.color = Color.white);
-                Collision.CreateContacts(bodies, out List<Contact> contacts);
+                Collison.CreateContacts(bodies, out List<Contact> contacts);
                 contacts.ForEach(contact => { contact.bodyA.shape.color = Color.red; contact.bodyB.shape.color = Color.red; });
                 ContactSolver.Resolve(contacts);
             }
-
-            timeAccumulator = timeAccumulator - fixedDeltaTime;
+            timeAccumaltor = timeAccumaltor - fixedDeltaTime;
         }
 
         if (wrap)
         {
             bodies.ForEach(body => body.position = Utilities.Wrap(body.position, -size, size));
         }
-        bodies.ForEach(body => { body.force = Vector2.zero; body.acceleration = Vector2.zero; });
+
+        bodies.ForEach(body => body.force = Vector2.zero);
+        bodies.ForEach(body => body.acceleration = Vector2.zero);
     }
 }

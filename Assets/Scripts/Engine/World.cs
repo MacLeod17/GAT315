@@ -19,7 +19,7 @@ public class World : MonoBehaviour
 
     static World instance;
 
-    public float timeAccumaltor;
+    public float timeAccumulator;
     public float fpsAverage;
     public float smoothing = 0.95f;
     public float fixedDeltaTime { get { return 1.0f / fixedFPS.value; } }
@@ -54,7 +54,7 @@ public class World : MonoBehaviour
         fpsAverage = (fpsAverage * smoothing) + (fps * (1 - smoothing));
         fpsText.value = fpsAverage.ToString("F2");
 
-        timeAccumaltor += Time.deltaTime;
+        timeAccumulator += Time.deltaTime;
 
         //forces 
         GravitationalForce.ApplyForce(bodies, gravitation.value);
@@ -62,22 +62,26 @@ public class World : MonoBehaviour
         springs.ForEach(spring => spring.ApplyForce());
         bodies.ForEach(body => vectorField.ApplyForce(body));
 
-        while (timeAccumaltor > fixedDeltaTime)
+        while (timeAccumulator > fixedDeltaTime)
         {
             bodies.ForEach(body => body.Step(fixedDeltaTime));
             bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedDeltaTime));//ExplicitEuler(body, dt));
             bodies.ForEach(body => body.shape.color = Color.green);
 
-            if (collision == true)
+            if (collision)
             {
-                bodies.ForEach(body => body.shape.color = Color.green);
+                bodies.ForEach(body => body.shape.color = Color.white);
                 broadPhase.Build(aabb, bodies);
 
-                Collison.CreateContacts(bodies, out List<Contact> contacts);
-                contacts.ForEach(contact => { contact.bodyA.shape.color = Color.red; contact.bodyB.shape.color = Color.red; });
+                Collision.CreateBroadPhaseContacts(broadPhase, bodies, out List<Contact> contacts);
+                Collision.CreateNarrowPhaseContacts(ref contacts);
+                contacts.ForEach(contact => Collision.UpdateContactInfo(ref contact));
+
                 ContactSolver.Resolve(contacts);
+
+                contacts.ForEach(contact => { contact.bodyA.shape.color = Color.red; contact.bodyB.shape.color = Color.red; });
             }
-            timeAccumaltor = timeAccumaltor - fixedDeltaTime;
+            timeAccumulator -= fixedDeltaTime;
         }
         broadPhase.Draw();
 

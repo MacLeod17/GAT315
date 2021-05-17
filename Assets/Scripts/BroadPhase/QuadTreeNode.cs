@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuadTreeNode
@@ -36,6 +37,7 @@ public class QuadTreeNode
             {
                 SubDivide();
             }
+
             northeast.Insert(body);
             northwest.Insert(body);
             southeast.Insert(body);
@@ -47,13 +49,7 @@ public class QuadTreeNode
     {
         if (!this.aABB.Contains(aabb)) return;
 
-        foreach (Body body in this.bodies)
-        {
-            if (body.shape.aABB.Contains(aabb))
-            {
-                bodies.Add(body);
-            }
-        }
+        bodies.AddRange(this.bodies.Where(body => body.shape.aABB.Contains(aabb)));
 
         if (subDivided)
         {

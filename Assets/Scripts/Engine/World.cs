@@ -52,7 +52,7 @@ public class World : MonoBehaviour
         float dt = Time.deltaTime;
         fps = (1.0f / dt);
         fpsAverage = (fpsAverage * smoothing) + (fps * (1 - smoothing));
-        fpsText.value = fixedFPS.value.ToString("F2");
+        fpsText.value = fpsAverage.ToString("F2");
 
         timeAccumaltor += Time.deltaTime;
 

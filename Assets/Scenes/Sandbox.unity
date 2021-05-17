@@ -5027,6 +5027,10 @@ MonoBehaviour:
   fixedFPS: {fileID: 11400000, guid: 44f230a823464cf4f9c8ebec4bcf0371, type: 2}
   fpsText: {fileID: 11400000, guid: 8784706c2d006af40bd6b1ae213b24e8, type: 2}
   vectorField: {fileID: 813269493}
+  valueText: {fileID: 0}
+  timeAccumaltor: 0
+  fpsAverage: 0
+  smoothing: 0.95
 --- !u!114 &1866475294
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class VectorField : Force
         int x = Mathf.FloorToInt(position.x);
         int y = Mathf.FloorToInt(position.y);
 
-        if (x < 0 || x >= grid.GetLength(0) || y < 0 || y > grid.GetLength(1))
+        if (x < 0 || x >= grid.GetLength(0) || y < 0 || y >= grid.GetLength(1))
         {
             return;
         }

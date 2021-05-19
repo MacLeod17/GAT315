@@ -9,7 +9,7 @@ public class QuadTree : BroadPhase
 
     public override void Build(AABB aabb, List<Body> bodies)
     {
-        potientialCollisionCount = 0;
+        potentialCollisionCount = 0;
         rootNode = new QuadTreeNode(aabb, capacity);
         bodies.ForEach(body => rootNode.Insert(body));
     }
@@ -17,7 +17,7 @@ public class QuadTree : BroadPhase
     public override void Query(AABB aabb, List<Body> bodies)
     {
         rootNode.Query(aabb, bodies);
-        potientialCollisionCount += bodies.Count;
+        potentialCollisionCount += bodies.Count;
     }
 
     public override void Query(Body body, List<Body> bodies)

@@ -12,6 +12,7 @@ public class World : MonoBehaviour
     public FloatData gravitation;
     public FloatData fixedFPS;
     public StringData fpsText;
+    public StringData collisionText;
     public VectorField vectorField;
 
     private Vector2 size;
@@ -30,7 +31,7 @@ public class World : MonoBehaviour
     public List<Spring> springs { get; set; } = new List<Spring>();
     public List<Force> forces { get; set; } = new List<Force>();
 
-    BroadPhase broadPhase = new QuadTree();
+    BroadPhase broadPhase = new BVH();
     public AABB AABB { get => aabb; }
 
     AABB aabb;
@@ -52,7 +53,7 @@ public class World : MonoBehaviour
         float dt = Time.deltaTime;
         fps = (1.0f / dt);
         fpsAverage = (fpsAverage * smoothing) + (fps * (1 - smoothing));
-        fpsText.value = fpsAverage.ToString("F2");
+        fpsText.value = $"FPS: {fpsAverage:F2}";
 
         timeAccumulator += Time.deltaTime;
 
@@ -83,6 +84,7 @@ public class World : MonoBehaviour
             }
             timeAccumulator -= fixedDeltaTime;
         }
+        collisionText.value = "Broad Phase: " + BroadPhase.potentialCollisionCount;
         broadPhase.Draw();
 
         if (wrap)

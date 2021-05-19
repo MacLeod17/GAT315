@@ -37,4 +37,19 @@ public struct AABB
         Lines.Instance.AddLine(new Vector2(max.x, min.y), new Vector2(max.x, max.y), color, width);
     }
 
+    public void SetMinMax(Vector2 min, Vector2 max)
+    {
+        size = (max - min);
+        center = min + extents;
+    }
+
+    public void Expand(Vector2 point)
+    {
+        SetMinMax(Vector2.Min(min, point), Vector2.Max(max, point));
+    }
+
+    public void Expand(AABB aabb)
+    {
+        SetMinMax(Vector2.Min(min, aabb.min), Vector2.Max(max, aabb.max));
+    }
 }

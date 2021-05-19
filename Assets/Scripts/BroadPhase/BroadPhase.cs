@@ -9,6 +9,6 @@ public abstract class BroadPhase
     public abstract void Query(Body body, List<Body> bodies);
     public abstract void Draw();
 
-    public static int potientialCollisionCount { get; set; } = 0;
+    public static int potentialCollisionCount { get; set; } = 0;
     public static Color[] colors = { Color.white, Color.red, Color.green, Color.blue, Color.yellow, Color.magenta, Color.cyan };
 }

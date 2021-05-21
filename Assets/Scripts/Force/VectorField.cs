@@ -46,7 +46,7 @@ public class VectorField : Force
         if (!enable) return;
 
         Vector2 position = body.position;
-        position = position + World.Instance.AABB.extents;
+        position += World.Instance.AABB.extents;
 
         int x = Mathf.FloorToInt(position.x);
         int y = Mathf.FloorToInt(position.y);

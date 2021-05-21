@@ -30,7 +30,7 @@ public class BVH : BroadPhase
 	public override void Query(Body body, List<Body> bodies)
 	{
 		//Query(< get body shape aabb >, bodies);
-		rootNode.Query(body.shape.aABB, bodies);
+		Query(body.shape.aABB, bodies);
 	}
 
 	public override void Draw()

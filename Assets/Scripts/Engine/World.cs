@@ -8,12 +8,18 @@ public class World : MonoBehaviour
     public BoolData simulate;
     public BoolData collision;
     public BoolData wrap;
+    public BoolData debugCollision;
+
     public FloatData gravity;
     public FloatData gravitation;
     public FloatData fixedFPS;
     public StringData fpsText;
     public StringData collisionText;
+    public BroadPhaseTypeData broadPhaseType;
     public VectorField vectorField;
+
+    BroadPhase broadPhase;
+    BroadPhase[] broadPhases = { new NullBroadPhase(), new QuadTree(), new BVH() };
 
     private Vector2 size;
     float fps = 0;
@@ -31,7 +37,6 @@ public class World : MonoBehaviour
     public List<Spring> springs { get; set; } = new List<Spring>();
     public List<Force> forces { get; set; } = new List<Force>();
 
-    BroadPhase broadPhase = new BVH();
     public AABB AABB { get => aabb; }
 
     AABB aabb;
@@ -45,6 +50,7 @@ public class World : MonoBehaviour
 
     void Update()
     {
+        broadPhase = broadPhases[broadPhaseType.index];
         springs.ForEach(spring => spring.Draw());
         if (!simulate.value)
         {
@@ -67,7 +73,6 @@ public class World : MonoBehaviour
         {
             bodies.ForEach(body => body.Step(fixedDeltaTime));
             bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedDeltaTime));//ExplicitEuler(body, dt));
-            bodies.ForEach(body => body.shape.color = Color.green);
 
             if (collision)
             {
@@ -84,8 +89,11 @@ public class World : MonoBehaviour
             }
             timeAccumulator -= fixedDeltaTime;
         }
-        collisionText.value = "Broad Phase: " + BroadPhase.potentialCollisionCount;
-        broadPhase.Draw();
+        if (debugCollision)
+        {
+            broadPhase.Draw();
+            collisionText.value = "Broad Phase: " + BroadPhase.potentialCollisionCount;
+        }
 
         if (wrap)
         {

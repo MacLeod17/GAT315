@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5065866465764029946}
-  - component: {fileID: 5065866465764029947}
+  - component: {fileID: -6689195410462943790}
   - component: {fileID: 5065866465764029945}
   m_Layer: 0
-  m_Name: ForwardSegment
+  m_Name: InverseSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5065866465764029947
+--- !u!114 &-6689195410462943790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5065866465764029944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9198fb8562d517c49a72e0210c491d7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 654b629c6af079246bf95f0b0c734fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputAngle: 0
-  enableNoise: 1
 --- !u!212 &5065866465764029945
 SpriteRenderer:
   m_ObjectHideFlags: 0

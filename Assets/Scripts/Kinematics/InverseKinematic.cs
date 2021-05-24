@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForwardKinematic : MonoBehaviour
+public class InverseKinematic : MonoBehaviour
 {
-    public ForwardKinematicSegment original;
+    public InverseKinematicSegment original;
     public int count = 5;
     [Range(0.1f, 3f)] public float size = 1;
     [Range(0.1f, 3f)] public float length = 1;
+    public Transform target;
 
-    List<ForwardKinematicSegment> segments = new List<ForwardKinematicSegment>();
+    List<InverseKinematicSegment> segments = new List<InverseKinematicSegment>();
 
     private void Start()
     {
@@ -27,16 +28,13 @@ public class ForwardKinematic : MonoBehaviour
 
     void Update()
     {
-        foreach (ForwardKinematicSegment segment in segments)
+        foreach (InverseKinematicSegment segment in segments)
         {
             segment.length = length;
             segment.size = size;
 
-            if (segment.parent != null)
-            {
-                segment.start = segment.parent.end;
-            }
-            //segment.CalculateEnd();
+            Vector2 position = (segment.parent != null) ? segment.parent.start : (Vector2)target.position;
+            segment.Follow(position);
         }
     }
 }
